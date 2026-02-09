@@ -15,7 +15,6 @@ authRouter.post('/api/signup', async(req,res)=>{
     const salt = await bcrypt.genSalt(10);
         // hash the password using the generate salt
     const hashedPassword = await bcrypt.hash(password,salt);
-
     let user = new User ({fullName, email, password:hashedPassword});
     user = await user.save();
     res.json({user});
@@ -49,7 +48,7 @@ authRouter.post('/api/signin',async(req, res)=>{
         }
         }
     } catch (error) {
-        res.status(500).json({error:e.message});    
+        res.status(500).json({error:error.message});    
     }
 });
 
